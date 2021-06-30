@@ -1,0 +1,25 @@
+.whisper-container {
+    position: relative;
+}
+
+.whisper-inner {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 120;
+}
+
+  .whisper-outer {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 100;
+    &.backdrop {
+        background: rgba(0,0,0,.6);
+        opacity: .5;
+    }
+}
