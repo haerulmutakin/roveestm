@@ -1,0 +1,86 @@
+.rov-space-container {
+    width: 100%;
+    overflow-x: scroll;
+}
+.rov-space {
+    height: calc(100vh - 100px);
+    padding: 10px 20px;
+    display: inline-flex;
+}
+
+.rov-add-space {
+    height: 40px;
+    color: #bdbdbd;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color .6s;
+    &:hover {
+        color: unset;
+    }
+}
+
+.add-space-form {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    padding: 0 10px;
+    border-width: 0 0 5px 0;
+    border-style: solid;
+    box-shadow: 0 1px 2px 1px rgba(0,0,0,.06);
+    input {
+        width: 100%;
+        text-transform: uppercase;
+    }
+}
+
+.new-board-container {
+    width: 280px;
+    .new-board-form {
+        width: 100%;
+        height: 40px;
+        border-radius: 4px;
+        background-color: #ffffff;
+        border-bottom: 5px solid #bdbdbd;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+    }
+    input {
+        width: 100%;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    .color-item {
+        width: 20px;
+        height: 20px;
+        border-radius: 2px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        margin: 5px;
+        cursor: pointer;
+    }
+}
+
+.board-color-list {
+    display: flex;
+}
+
+.new-board-property {
+    background-color: #ffffff;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 4px;
+
+    .optional {
+        margin-bottom: 10px;
+    }
+}

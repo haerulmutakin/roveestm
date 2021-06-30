@@ -1,0 +1,33 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f1f2f5 !important;
+    // background-color: #4cbf6a !important;
+    font-size: 10px
+}
+
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center
+  }
+
+  .new-project-form {
+    width: 100%;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 0 10px;
+    margin-bottom: 10px;
+  }
+
+@import './layout/login';
+@import './layout//header';
+@import './layout/spacenav';
+@import './layout//space';
+@import './layout//board';
+@import './layout//task';
+@import './layout//projects';

@@ -1,0 +1,49 @@
+.rov-projects {
+    width: 100%;
+    margin-top: 30px;
+    padding: 0 20px;
+}
+
+.projects-group {
+    margin: 20px 0;
+    .group-title {
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 10px;
+        i {
+            font-size: 16px;
+        }
+    }
+}
+
+.group-content {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-gap: 20px;
+}
+
+.project-item {
+    background-color: #fff;
+    box-shadow: 0 1px 2px 1px rgba(0,0,0,.06);
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: 600;
+    position: relative;
+    cursor: pointer;
+    &:hover {
+        .action {
+            display: block;
+        }
+    }
+    .bookmark-icon {
+        margin-top: 5px;
+        display: flex;
+        justify-content: flex-end;
+    }
+    .action {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        display: none;
+    }
+}

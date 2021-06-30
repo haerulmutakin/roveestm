@@ -1,0 +1,28 @@
+.rov-task {
+    margin-top: 10px;
+    width: 100%;
+    position: relative;
+}
+.task-detail {
+    padding: 10px;
+    border-radius: 4px;
+    background: #ffffff;
+    box-shadow: 0 1px 2px 1px rgba(0,0,0,.06);
+    position: relative;
+    cursor: pointer;
+    &:hover {
+        .task-edit-action {
+            display: block;
+        }
+    }
+    .task-info {
+        margin-top: 10px;
+    }
+
+    .task-edit-action {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        display: none;
+    }
+}

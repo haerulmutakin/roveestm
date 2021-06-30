@@ -1,0 +1,83 @@
+
+.rov-board {
+    width: 280px;
+    margin-right: 20px;
+}
+
+.board-header {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    border-width: 0 0 5px 0;
+    border-style: solid;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px 1px rgba(0,0,0,.06);
+    background-color: #ffffff;
+    input.title {
+        width: 100%;
+        font-weight: bold;
+        text-transform: uppercase;
+        border: none;
+    }
+
+    .add-task {
+        margin-left: 5px;
+        color: #bdbdbd;
+        cursor: pointer;
+        transition: color .5s;
+        &:hover {
+            color: unset;
+        }
+    }
+}
+
+.add-icon {
+    margin-top: 15px;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    color: #bdbdbd;
+    cursor: pointer;
+    transition: color .5s;
+    &:hover {
+        color: unset;
+    }
+    i {
+        margin-right: 5px;
+    }
+}
+
+.new-task {
+    margin-top: 10px;
+}
+
+.task-form-container {
+    background-color: #ffffff;
+    border-radius: 4px;
+    .priority {
+        label {
+            margin-left: 10px;
+        }
+    }
+    .priority-list {
+        .item {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            i {
+                margin-right: 15px;
+            }
+            &:hover {
+                background-color: beige;
+            }
+        }
+    }
+}
+
+textarea.task-form {
+    width: 100%;
+    resize: none;
+}
