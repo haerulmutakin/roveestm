@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import { ButtonToolbar, Dropdown, Icon, IconButton } from "rsuite";
 import { Auth } from "_firebaseconn/firebase.config";
+import { AuthContext } from "_provider/AuthProvider";
 
 const Header = ({projectData, onNewProject, history}) => {
+    const currentUser = useContext(AuthContext);
 
     const handleProjectSelect = (event) => {
         history.push('/space/' + event.id);
@@ -39,8 +42,8 @@ const Header = ({projectData, onNewProject, history}) => {
                 <div className="nav-right">
                 <ButtonToolbar>
                     <IconButton icon={<Icon icon="bell" />} />
-                    <Dropdown title="Haerul" placement="bottomEnd" appearance="default" onSelect={handleProfileDropdownSelect}>
-                        <Dropdown.Item>Haerul Mutakin</Dropdown.Item>
+                    <Dropdown title={currentUser?.email} placement="bottomEnd" appearance="default" onSelect={handleProfileDropdownSelect}>
+                        <Dropdown.Item>{currentUser?.email}</Dropdown.Item>
                         <Dropdown.Item>Profile</Dropdown.Item>
                         <Dropdown.Item>Setting</Dropdown.Item>
                         <Dropdown.Item eventKey={'logout'}>Logout</Dropdown.Item>
