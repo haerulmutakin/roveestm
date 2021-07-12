@@ -22,6 +22,7 @@ const Core = ({history}) => {
 
     const getProjects = () => {
         projectsDB
+            .where('userId', '==', currentUser.uid)
             .onSnapshot(response => {
                 const data = [];
                 response.forEach(element => {

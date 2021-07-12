@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ButtonGroup, ButtonToolbar, Icon, IconButton } from "rsuite";
 import firebaseDB from '_firebaseconn/firebase.config';
+import { AuthContext } from "_provider/AuthProvider";
 
 const Projects = ({history}) => {
+    const currentUser = useContext(AuthContext);
     const projectsDB = firebaseDB.firestore().collection('projects');
     const [projects, setProjects] = useState([]);
     const [pinnedProjects, setPinnedProjects] = useState([]);
@@ -14,6 +16,7 @@ const Projects = ({history}) => {
 
     const getProjects = () => {
         projectsDB
+            .where('userId', '==', currentUser.uid)
             .onSnapshot(response => {
                 const data = [];
                 const pinnedData = [];
