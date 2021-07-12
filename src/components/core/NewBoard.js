@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 import { Button, Checkbox, Icon, Alert } from "rsuite";
@@ -6,19 +6,30 @@ import firebaseDB from "_firebaseconn/firebase.config";
 import { AuthContext } from "_provider/AuthProvider";
 import { BoardColor } from "assets/mock/boardColor";
 
-const NewBoard = ({onComplete}) => {
+const NewBoard = ({boardData, onComplete}) => {
     const currentUser = useContext(AuthContext);
     const urlParams = useParams();
+    const [board, setBoard] = useState(boardData);
     const boardDB = firebaseDB.firestore().collection('boards');
     const [boardTitle, setBoardName] = useState('');
     const [allowNewTask, setAllowNewTask] = useState(true);
     const [editable, setEditable] = useState(true);
     const [boardColor, setBoardColor] = useState(BoardColor[0]);
 
+    useEffect(() => {
+        setBoard(boardData);
+        if (boardData) {
+            setBoardName(boardData.title);
+            setBoardColor(boardData.boardColor);
+            setAllowNewTask(boardData.allowNewTask);
+            setEditable(boardData.editable);
+        }
+    }, [boardData]);
+
     const handleInputKeyDown = (e) => {
         if(e.keyCode === 13 && e.shiftKey === false) {
             if (!boardNamevalid()) return;
-            addBoard();
+            boardData ? updateBoard() : addBoard();
             onComplete();
         }
     }
@@ -39,8 +50,22 @@ const NewBoard = ({onComplete}) => {
 
     const handleBoardSubmit = () => {
         if (!boardNamevalid()) return;
-        addBoard();
+        boardData ? updateBoard() : addBoard();
         onComplete();
+    }
+
+    const updateBoard = () => {
+        const boardPayload = board;
+        board.title = boardTitle;
+        board.allowNewTask = allowNewTask;
+        board.editable = editable;
+        board.boardColor = boardColor;
+        boardDB
+            .doc(boardPayload.id)
+            .update(boardPayload)
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     const addBoard = () => {
@@ -86,10 +111,10 @@ const NewBoard = ({onComplete}) => {
                     })}
                 </div>
                 <div className="optional">
-                    <Checkbox defaultChecked onChange={(value, checked, event) => setAllowNewTask(checked)} >Allow new task</Checkbox>
-                    <Checkbox defaultChecked onChange={(value, checked, event) => setEditable(checked)} >Task editable</Checkbox>
+                    <Checkbox checked={allowNewTask} onChange={(value, checked, event) => setAllowNewTask(checked)} >Allow new task</Checkbox>
+                    <Checkbox checked={editable} onChange={(value, checked, event) => setEditable(checked)} >Task editable</Checkbox>
                 </div>
-                <Button onClick={handleBoardSubmit} color="blue" size="sm">Add board</Button>
+                <Button onClick={handleBoardSubmit} color="blue" size="sm">{boardData ? 'Update board' : 'Add board'}</Button>
             </div>
         </div>
     )

@@ -19,6 +19,7 @@ const Space = () => {
         firebaseDB.firestore().collection('projects').doc(urlParams.projectId).get()
             .then(res => {
                 setProjectDetail(res.data());
+                document.title = res.data().title + ' | Rovees TM'
             });
     }, [urlParams])
 

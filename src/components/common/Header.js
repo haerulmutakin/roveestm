@@ -5,9 +5,14 @@ const Header = ({projectData, onNewProject, history}) => {
     const handleProjectSelect = (event) => {
         history.push('/space/' + event.id);
     }
+
+    const handleBrandClick = () => {
+        history.push('/');
+        document.title = 'Rovees TM';
+    }
     return (
         <div className="rov-header">
-            <div className="rov-brand">Rovees TM</div>
+            <div className="rov-brand" onClick={handleBrandClick}>Rovees TM</div>
             <div className="rov-nav">
                 <div className="nav-left">
                     <ButtonToolbar>
