@@ -1,4 +1,5 @@
 import { ButtonToolbar, Dropdown, Icon, IconButton } from "rsuite";
+import { Auth } from "_firebaseconn/firebase.config";
 
 const Header = ({projectData, onNewProject, history}) => {
 
@@ -9,6 +10,17 @@ const Header = ({projectData, onNewProject, history}) => {
     const handleBrandClick = () => {
         history.push('/');
         document.title = 'Rovees TM';
+    }
+
+    const handleProfileDropdownSelect = (event) => {
+        if (event === 'logout') {
+            doLogout();
+        }
+    }
+
+    const doLogout = () => {
+        Auth.signOut()
+            .catch(err => console.warn(err))
     }
     return (
         <div className="rov-header">
@@ -27,11 +39,11 @@ const Header = ({projectData, onNewProject, history}) => {
                 <div className="nav-right">
                 <ButtonToolbar>
                     <IconButton icon={<Icon icon="bell" />} />
-                    <Dropdown title="Haerul" placement="bottomEnd" appearance="default">
+                    <Dropdown title="Haerul" placement="bottomEnd" appearance="default" onSelect={handleProfileDropdownSelect}>
                         <Dropdown.Item>Haerul Mutakin</Dropdown.Item>
                         <Dropdown.Item>Profile</Dropdown.Item>
                         <Dropdown.Item>Setting</Dropdown.Item>
-                        <Dropdown.Item>Logout</Dropdown.Item>
+                        <Dropdown.Item eventKey={'logout'}>Logout</Dropdown.Item>
                     </Dropdown>
                 </ButtonToolbar>
                 </div>
