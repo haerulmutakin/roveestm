@@ -1,5 +1,14 @@
+import { useState } from 'react';
 import { Button, IconButton, Icon, ButtonToolbar, ButtonGroup } from 'rsuite';
-const SpaceNav = ({projectData}) => {
+const SpaceNav = ({projectData, onViewModeChange}) => {
+    const [viewMode, setViewMode] = useState('board');
+
+    const handleViewClick = (view) => {
+        if (view !== viewMode) {
+            setViewMode(prev => prev === 'board'? 'list' : 'board');
+            onViewModeChange(view)
+        }
+    }
     return (
         <div className="rov-space-nav">
             <ButtonToolbar>
@@ -15,8 +24,8 @@ const SpaceNav = ({projectData}) => {
             </ButtonToolbar>
             <ButtonToolbar>
                 <ButtonGroup>
-                    <IconButton icon={<Icon icon="list-ul" />} ></IconButton>
-                    <IconButton icon={<Icon icon="squares" />} ></IconButton>
+                    <IconButton onClick={() => handleViewClick('list')} active={viewMode === 'list'} icon={<Icon icon="list-ul" />} ></IconButton>
+                    <IconButton onClick={() => handleViewClick('board')} active={viewMode === 'board'} icon={<Icon icon="squares" />} ></IconButton>
                 </ButtonGroup>
             </ButtonToolbar>
         </div>

@@ -13,6 +13,7 @@ const Space = () => {
     const [ showTaskForm, setShowTaskForm ] = useState(false);
     const [ boards, setBoards ] = useState([]);
     const [ projectDetail, setProjectDetail ] = useState({});
+    const [viewMode, setViewMode] = useState('board');
 
 
     useEffect(() => {
@@ -41,11 +42,15 @@ const Space = () => {
             })
     }
 
+    const handleViewModeChange = (mode) => {
+        setViewMode(mode);
+    }
+
     return (
         <React.Fragment>
-            <SpaceNav projectData={projectDetail} />
+            <SpaceNav projectData={projectDetail} onViewModeChange={handleViewModeChange}/>
             <div className="rov-space-container">
-                <div className="rov-space">
+                {viewMode === 'board' && <div className="rov-space">
                     {boards.map((item, index) => {
                         return <Board key={index} boardData={item}/>
                     })}
@@ -62,7 +67,10 @@ const Space = () => {
                             </Whispering>
                         }
                     </div>
-                </div>
+                </div>}
+            </div>
+            <div className="roc-space-list-container">
+                This is list view
             </div>
         </React.Fragment>
     )
