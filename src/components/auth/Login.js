@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Schema, FormGroup, Form, FormControl, ButtonGroup, Button, ControlLabel } from 'rsuite';
+import { Schema, FormGroup, Form, FormControl, ButtonGroup, Button, ControlLabel, Alert } from 'rsuite';
 import { Auth } from '_firebaseconn/firebase.config';
 import { AuthContext } from '_provider/AuthProvider';
 
@@ -9,6 +9,7 @@ const Login = ({history}) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [signInMode, setSignInMode] = useState(true);
 
     const loginFormModel = Schema.Model({
         email: StringType()
@@ -19,15 +20,30 @@ const Login = ({history}) => {
             .minLength(6, 'The field cannot be less than 6 characters')
     });
 
-    const handleLoginSubmit = () => {
+    const handleSignSubmit = () => {
+        signInMode ? doSignIn() : doSignUp();
+    }
+
+    const doSignIn = () => {
         Auth.signInWithEmailAndPassword(email, password)
             .then(() => {
                 history.push('/');
             })
             .catch(err => {
-                console.log(err);
+                Alert.error(err.message)
             })
+    }
 
+    const doSignUp = () => {
+        Auth.createUserWithEmailAndPassword(email, password)
+        .then(() =>  history.push('/'))
+        .catch( err => {
+            Alert.error(err.message)
+        });
+    }
+
+    const toggleSign = () => {
+        setSignInMode(prev => !prev);
     }
 
     if (currentUser) {
@@ -57,9 +73,15 @@ const Login = ({history}) => {
                     />
                 </FormGroup>
                 <ButtonGroup justified>
-                    <Button type="submit" appearance="primary" onClick={handleLoginSubmit}>Sign In</Button>
+                    <Button 
+                        type="submit" 
+                        appearance="primary" 
+                        onClick={handleSignSubmit}
+                    >{ signInMode ? 'Sign In' : 'Sign Up'}</Button>
                 </ButtonGroup>
-                <p className="signup-ins">Don't have account? Sign Up</p>
+                <p className="signup-ins">
+                    { signInMode ? `Don't have account? ` : `Already have account? `}<span onClick={toggleSign}>{ signInMode ? 'Sign Up' : 'Sign In'}</span>
+                </p>
             </Form>
         </div>
     )
