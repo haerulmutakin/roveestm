@@ -20,10 +20,9 @@ const Login = ({history}) => {
     });
 
     const handleLoginSubmit = () => {
-        console.log(email, password);
         Auth.signInWithEmailAndPassword(email, password)
             .then(() => {
-                console.log('berhasil')
+                history.push('/');
             })
             .catch(err => {
                 console.log(err);
