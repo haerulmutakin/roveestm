@@ -3,9 +3,10 @@ import { useParams } from 'react-router-dom';
 import { Icon, Whisper, Tooltip } from "rsuite";
 import firebaseDB from "_firebaseconn/firebase.config";
 import Whispering from "components/shared/Whisper/Whisper";
-import Board from "./Board";
-import SpaceNav from "components/common/Spacenav";
-import NewBoard from "./NewBoard";
+import Board from "./space-main/board/Board";
+import List from "./space-main/list/List";
+import SpaceNav from "./space-nav/Spacenav";
+import NewBoard from "../NewBoard";
 
 const Space = () => {
     const urlParams = useParams();
@@ -70,7 +71,7 @@ const Space = () => {
                 </div>}
             </div>
             <div className="roc-space-list-container">
-                This is list view
+                <List />
             </div>
         </React.Fragment>
     )

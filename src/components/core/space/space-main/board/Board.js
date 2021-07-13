@@ -2,10 +2,10 @@
 import { useEffect, useState } from "react";
 import { Whisper, Tooltip, Icon } from "rsuite";
 import firebaseDB from "_firebaseconn/firebase.config";
-import Task from "./Task";
+import Task from "../../../Task";
 import Whispering from "components/shared/Whisper/Whisper";
-import NewTask from "./NewTask";
-import NewBoard from "./NewBoard";
+import NewTask from "../../../NewTask";
+import NewBoard from "../../../NewBoard";
 
 const Board = ({boardData}) => {
     const tasksDB = firebaseDB.firestore().collection('tasks');
