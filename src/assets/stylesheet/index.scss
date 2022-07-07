@@ -1,6 +1,9 @@
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #f1f2f5 !important;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
     // background-color: #4cbf6a !important;
     font-size: 10px
 }
